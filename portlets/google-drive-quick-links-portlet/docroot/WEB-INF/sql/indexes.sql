@@ -1,0 +1,1 @@
+create index IX_E93DC3BB on rivetlogic_DriveLinks (USER_ID);

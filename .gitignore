@@ -1,0 +1,10 @@
+.*
+!.gitignore
+*classes/
+*~
+/build.*.properties
+/dist/
+build/
+/lib/
+*.iml
+ivy.xml.MD5
