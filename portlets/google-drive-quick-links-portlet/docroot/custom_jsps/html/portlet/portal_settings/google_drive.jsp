@@ -40,7 +40,7 @@ String googleClientId = PrefsPropsUtil.getString(company.getCompanyId(), GOOGLE_
 String googleDeveloperKey = PrefsPropsUtil.getString(company.getCompanyId(), GOOGLE_DRIVE_DEVKEY, GetterUtil.getString(PropsUtil.get(GOOGLE_DRIVE_DEVKEY)));
 %>
 
-<h3><liferay-ui:message key="miscellaneous-menu-text" /></h3>
+<h3><liferay-ui:message key="miscellaneous-title" /></h3>
 
 <aui:fieldset>
 	<aui:input autocomplete="off" cssClass="lfr-input-text-container" 
