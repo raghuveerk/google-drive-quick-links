@@ -60,6 +60,7 @@ public class GoogleDriveQuickLinks extends MVCPortlet {
 		}
 		
 		request.setAttribute("userId", themeDisplay.getRealUser().getUuid());
+		request.setAttribute("signedUser", themeDisplay.isSignedIn());
 		request.setAttribute("developerKey", googleDeveloperKey);
         request.setAttribute("clientId", googleClientId);
 		
@@ -73,6 +74,7 @@ public class GoogleDriveQuickLinks extends MVCPortlet {
 	public void addDriveLink(ActionRequest request, ActionResponse response)
             throws PortletException, IOException{
 		
+		String documentId = ParamUtil.getString(request, "documentId");
         String documentName = ParamUtil.getString(request, "documentName");
         String documentUrl = ParamUtil.getString(request, "documentUrl");
 		
@@ -80,6 +82,7 @@ public class GoogleDriveQuickLinks extends MVCPortlet {
                 (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
 		
         DriveLinksImpl driveLink = new DriveLinksImpl();
+        driveLink.setDOCUMENT_ID(documentId);
         driveLink.setNAME(documentName);
         driveLink.setURL(documentUrl);
         driveLink.setUSER_ID(themeDisplay.getRealUser().getUuid());
@@ -96,11 +99,11 @@ public class GoogleDriveQuickLinks extends MVCPortlet {
     public void deleteDriveLink(ActionRequest request, ActionResponse response)
             throws PortletException, IOException{
 		
-        String linkName = ParamUtil.getString(request, "linkName");
+        String linkId = ParamUtil.getString(request, "linkId");
         String linkUser = ParamUtil.getString(request, "linkUser");
 		
         DriveLinksImpl driveLink = new DriveLinksImpl();
-        driveLink.setNAME(linkName);
+        driveLink.setDOCUMENT_ID(linkId);
         driveLink.setUSER_ID(linkUser);
 		
         try {

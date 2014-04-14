@@ -4,7 +4,7 @@
 	
 	<portlet>
 		<portlet-name>googledrivequicklinks</portlet-name>
-		<display-name>Google Drive Quick Links</display-name>
+		<display-name>My Google Drive Quick Links</display-name>
 		<portlet-class>com.rivetlogic.portlet.GoogleDriveQuickLinks</portlet-class>
 		<init-param>
 			<name>view-template</name>
@@ -17,8 +17,8 @@
 		</supports>
 		<resource-bundle>content/Language</resource-bundle>
 		<portlet-info>
-			<title>Google Drive Quick Links</title>
-			<short-title>Google Drive Quick Links</short-title>
+			<title>My Google Drive Quick Links</title>
+			<short-title>My Google Drive Quick Links</short-title>
 			<keywords></keywords>
 		</portlet-info>
 		<security-role-ref>

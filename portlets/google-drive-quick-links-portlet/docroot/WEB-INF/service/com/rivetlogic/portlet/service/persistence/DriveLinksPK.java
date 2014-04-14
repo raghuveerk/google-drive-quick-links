@@ -24,14 +24,14 @@ import java.io.Serializable;
  */
 public class DriveLinksPK implements Comparable<DriveLinksPK>, Serializable {
 	public String USER_ID;
-	public String NAME;
+	public String DOCUMENT_ID;
 
 	public DriveLinksPK() {
 	}
 
-	public DriveLinksPK(String USER_ID, String NAME) {
+	public DriveLinksPK(String USER_ID, String DOCUMENT_ID) {
 		this.USER_ID = USER_ID;
-		this.NAME = NAME;
+		this.DOCUMENT_ID = DOCUMENT_ID;
 	}
 
 	public String getUSER_ID() {
@@ -42,12 +42,12 @@ public class DriveLinksPK implements Comparable<DriveLinksPK>, Serializable {
 		this.USER_ID = USER_ID;
 	}
 
-	public String getNAME() {
-		return NAME;
+	public String getDOCUMENT_ID() {
+		return DOCUMENT_ID;
 	}
 
-	public void setNAME(String NAME) {
-		this.NAME = NAME;
+	public void setDOCUMENT_ID(String DOCUMENT_ID) {
+		this.DOCUMENT_ID = DOCUMENT_ID;
 	}
 
 	@Override
@@ -64,7 +64,7 @@ public class DriveLinksPK implements Comparable<DriveLinksPK>, Serializable {
 			return value;
 		}
 
-		value = NAME.compareTo(pk.NAME);
+		value = DOCUMENT_ID.compareTo(pk.DOCUMENT_ID);
 
 		if (value != 0) {
 			return value;
@@ -85,7 +85,8 @@ public class DriveLinksPK implements Comparable<DriveLinksPK>, Serializable {
 
 		DriveLinksPK pk = (DriveLinksPK)obj;
 
-		if ((USER_ID.equals(pk.USER_ID)) && (NAME.equals(pk.NAME))) {
+		if ((USER_ID.equals(pk.USER_ID)) &&
+				(DOCUMENT_ID.equals(pk.DOCUMENT_ID))) {
 			return true;
 		}
 		else {
@@ -95,7 +96,7 @@ public class DriveLinksPK implements Comparable<DriveLinksPK>, Serializable {
 
 	@Override
 	public int hashCode() {
-		return (String.valueOf(USER_ID) + String.valueOf(NAME)).hashCode();
+		return (String.valueOf(USER_ID) + String.valueOf(DOCUMENT_ID)).hashCode();
 	}
 
 	@Override
@@ -110,9 +111,9 @@ public class DriveLinksPK implements Comparable<DriveLinksPK>, Serializable {
 
 		sb.append(StringPool.COMMA);
 		sb.append(StringPool.SPACE);
-		sb.append("NAME");
+		sb.append("DOCUMENT_ID");
 		sb.append(StringPool.EQUAL);
-		sb.append(NAME);
+		sb.append(DOCUMENT_ID);
 
 		sb.append(StringPool.CLOSE_CURLY_BRACE);
 

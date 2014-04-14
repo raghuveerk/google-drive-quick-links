@@ -63,7 +63,8 @@ iteratorURL.setParameter("userId", userId);
         className="com.rivetlogic.portlet.model.DriveLinks">
  	
         <liferay-ui:search-container-column-text 
-            name="file-name" value="${content.NAME}" />
+            name="file-name" value="${content.NAME}" 
+            href="${content.URL}" target="_blank" />
         <liferay-ui:search-container-column-jsp 
             path="/html/googledrivequicklinks/include/driveLinks_actions.jsp" />
     </liferay-ui:search-container-row>
@@ -72,13 +73,20 @@ iteratorURL.setParameter("userId", userId);
 
 <aui:input name="documentUrl" id="documentUrl" type="hidden" />
 <aui:input name="documentName" id="documentName" type="hidden" />
+<aui:input name="documentId" id="documentId" type="hidden" />
 
+<c:if test="${developerKey == '' || clientId == ''}">
+	<liferay-ui:message key="no-keys-message" />
+</c:if>
+
+<c:if test="${signedUser}">
 <aui:fieldset>
     <aui:button-row>
         <aui:button type="submit" value="select-button" 
             onClick="UtilityClass.setAction('${pns}','${selectDriveFileUrl}')" />
     </aui:button-row>
 </aui:fieldset>
+</c:if>
 </aui:form>
 
 <c:if test="${showDrive}">

@@ -875,6 +875,7 @@ public class DriveLinksPersistenceImpl extends BasePersistenceImpl<DriveLinks>
 		driveLinksImpl.setPrimaryKey(driveLinks.getPrimaryKey());
 
 		driveLinksImpl.setUSER_ID(driveLinks.getUSER_ID());
+		driveLinksImpl.setDOCUMENT_ID(driveLinks.getDOCUMENT_ID());
 		driveLinksImpl.setNAME(driveLinks.getNAME());
 		driveLinksImpl.setURL(driveLinks.getURL());
 

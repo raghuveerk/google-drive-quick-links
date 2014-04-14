@@ -1,1 +1,1 @@
-create index IX_E93DC3BB on rivetlogic_DriveLinks (USER_ID);
+create index IX_A2533321 on rivetlogic_driveQL_DriveLinks (USER_ID);

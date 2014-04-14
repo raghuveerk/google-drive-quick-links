@@ -49,6 +49,7 @@ public class DriveLinksWrapper implements DriveLinks, ModelWrapper<DriveLinks> {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("USER_ID", getUSER_ID());
+		attributes.put("DOCUMENT_ID", getDOCUMENT_ID());
 		attributes.put("NAME", getNAME());
 		attributes.put("URL", getURL());
 
@@ -61,6 +62,12 @@ public class DriveLinksWrapper implements DriveLinks, ModelWrapper<DriveLinks> {
 
 		if (USER_ID != null) {
 			setUSER_ID(USER_ID);
+		}
+
+		String DOCUMENT_ID = (String)attributes.get("DOCUMENT_ID");
+
+		if (DOCUMENT_ID != null) {
+			setDOCUMENT_ID(DOCUMENT_ID);
 		}
 
 		String NAME = (String)attributes.get("NAME");
@@ -115,6 +122,26 @@ public class DriveLinksWrapper implements DriveLinks, ModelWrapper<DriveLinks> {
 	@Override
 	public void setUSER_ID(java.lang.String USER_ID) {
 		_driveLinks.setUSER_ID(USER_ID);
+	}
+
+	/**
+	* Returns the d o c u m e n t_ i d of this drive links.
+	*
+	* @return the d o c u m e n t_ i d of this drive links
+	*/
+	@Override
+	public java.lang.String getDOCUMENT_ID() {
+		return _driveLinks.getDOCUMENT_ID();
+	}
+
+	/**
+	* Sets the d o c u m e n t_ i d of this drive links.
+	*
+	* @param DOCUMENT_ID the d o c u m e n t_ i d of this drive links
+	*/
+	@Override
+	public void setDOCUMENT_ID(java.lang.String DOCUMENT_ID) {
+		_driveLinks.setDOCUMENT_ID(DOCUMENT_ID);
 	}
 
 	/**

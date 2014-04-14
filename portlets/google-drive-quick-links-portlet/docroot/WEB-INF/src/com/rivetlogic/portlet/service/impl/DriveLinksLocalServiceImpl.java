@@ -57,6 +57,7 @@ public class DriveLinksLocalServiceImpl extends DriveLinksLocalServiceBaseImpl {
         DriveLinksPK dlPK = new DriveLinksPK();
 		
         DriveLinks driveLink = driveLinksPersistence.create(dlPK);
+        driveLink.setDOCUMENT_ID(newLink.getDOCUMENT_ID());
         driveLink.setNAME(newLink.getNAME());
         driveLink.setURL(newLink.getURL());
         driveLink.setUSER_ID(newLink.getUSER_ID());
@@ -88,7 +89,7 @@ public class DriveLinksLocalServiceImpl extends DriveLinksLocalServiceBaseImpl {
         int count = 0;
 		
         try {
-            count = driveLinksPersistence.findByUserId(userId).size();
+            count = driveLinksPersistence.countByUserId(userId);
         } catch (SystemException e) {
             LOG.error(e);
         }
@@ -97,7 +98,7 @@ public class DriveLinksLocalServiceImpl extends DriveLinksLocalServiceBaseImpl {
 	
     public boolean linkExist(DriveLinks driveLink) throws SystemException {
         DriveLinksPK dlPK = new DriveLinksPK();
-        dlPK.setNAME(driveLink.getNAME());
+        dlPK.setDOCUMENT_ID(driveLink.getDOCUMENT_ID());
         dlPK.setUSER_ID(driveLink.getUSER_ID());
 		
         if(driveLinksPersistence.fetchByPrimaryKey(dlPK) != null){

@@ -29,7 +29,7 @@ String edit = "/edit";
 %>
 
 <portlet:actionURL name="deleteDriveLink" var="deleteDriveLinkUrl">
-    <portlet:param name="linkName" value="<%=link.getNAME()%>"/>
+    <portlet:param name="linkId" value="<%=link.getDOCUMENT_ID()%>"/>
     <portlet:param name="linkUser" value="<%=link.getUSER_ID()%>"/>
 </portlet:actionURL>
 

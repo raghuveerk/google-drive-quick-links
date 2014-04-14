@@ -11,7 +11,8 @@
 		<id-class class="com.rivetlogic.portlet.service.persistence.DriveLinksPK" />
 		<attributes>
 			<id name="USER_ID" />
-			<id name="NAME" />
+			<id name="DOCUMENT_ID" />
+			<basic name="NAME" />
 			<basic name="URL" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
@@ -19,7 +20,7 @@
 		</attributes>
 	</mapped-superclass>
 	<entity class="com.rivetlogic.portlet.model.impl.DriveLinksImpl" name="DriveLinks">
-		<table name="rivetlogic_DriveLinks" />
+		<table name="rivetlogic_driveQL_DriveLinks" />
 		<attributes />
 	</entity>
 </entity-mappings>

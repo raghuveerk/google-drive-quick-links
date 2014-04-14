@@ -72,6 +72,7 @@ YUI.add('picker-module', function (Y) {
         if (data[google.picker.Response.ACTION] == google.picker.Action.PICKED) {
 	        var doc = data[google.picker.Response.DOCUMENTS][0];
 	        var name = doc[google.picker.Document.NAME];
+	        var id = doc[google.picker.Document.ID];
 	         
 	        var url = doc[google.picker.Document.URL]; 
 	        var urlIndex = url.lastIndexOf("/");
@@ -79,6 +80,7 @@ YUI.add('picker-module', function (Y) {
 	         
 	        document.getElementById(portletNamespace+'documentUrl').value=url;
 	        document.getElementById(portletNamespace+'documentName').value=name;
+	        document.getElementById(portletNamespace+'documentId').value=id;
 	         
 	        UtilityClass.setAction(portletNamespace,action);
 	        UtilityClass.formSubmit(portletNamespace);

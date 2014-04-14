@@ -33,6 +33,7 @@ public class DriveLinksSoap implements Serializable {
 		DriveLinksSoap soapModel = new DriveLinksSoap();
 
 		soapModel.setUSER_ID(model.getUSER_ID());
+		soapModel.setDOCUMENT_ID(model.getDOCUMENT_ID());
 		soapModel.setNAME(model.getNAME());
 		soapModel.setURL(model.getURL());
 
@@ -80,12 +81,12 @@ public class DriveLinksSoap implements Serializable {
 	}
 
 	public DriveLinksPK getPrimaryKey() {
-		return new DriveLinksPK(_USER_ID, _NAME);
+		return new DriveLinksPK(_USER_ID, _DOCUMENT_ID);
 	}
 
 	public void setPrimaryKey(DriveLinksPK pk) {
 		setUSER_ID(pk.USER_ID);
-		setNAME(pk.NAME);
+		setDOCUMENT_ID(pk.DOCUMENT_ID);
 	}
 
 	public String getUSER_ID() {
@@ -94,6 +95,14 @@ public class DriveLinksSoap implements Serializable {
 
 	public void setUSER_ID(String USER_ID) {
 		_USER_ID = USER_ID;
+	}
+
+	public String getDOCUMENT_ID() {
+		return _DOCUMENT_ID;
+	}
+
+	public void setDOCUMENT_ID(String DOCUMENT_ID) {
+		_DOCUMENT_ID = DOCUMENT_ID;
 	}
 
 	public String getNAME() {
@@ -113,6 +122,7 @@ public class DriveLinksSoap implements Serializable {
 	}
 
 	private String _USER_ID;
+	private String _DOCUMENT_ID;
 	private String _NAME;
 	private String _URL;
 }

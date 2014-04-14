@@ -36,10 +36,12 @@ public class DriveLinksCacheModel implements CacheModel<DriveLinks>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(7);
+		StringBundler sb = new StringBundler(9);
 
 		sb.append("{USER_ID=");
 		sb.append(USER_ID);
+		sb.append(", DOCUMENT_ID=");
+		sb.append(DOCUMENT_ID);
 		sb.append(", NAME=");
 		sb.append(NAME);
 		sb.append(", URL=");
@@ -58,6 +60,13 @@ public class DriveLinksCacheModel implements CacheModel<DriveLinks>,
 		}
 		else {
 			driveLinksImpl.setUSER_ID(USER_ID);
+		}
+
+		if (DOCUMENT_ID == null) {
+			driveLinksImpl.setDOCUMENT_ID(StringPool.BLANK);
+		}
+		else {
+			driveLinksImpl.setDOCUMENT_ID(DOCUMENT_ID);
 		}
 
 		if (NAME == null) {
@@ -82,6 +91,7 @@ public class DriveLinksCacheModel implements CacheModel<DriveLinks>,
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		USER_ID = objectInput.readUTF();
+		DOCUMENT_ID = objectInput.readUTF();
 		NAME = objectInput.readUTF();
 		URL = objectInput.readUTF();
 	}
@@ -94,6 +104,13 @@ public class DriveLinksCacheModel implements CacheModel<DriveLinks>,
 		}
 		else {
 			objectOutput.writeUTF(USER_ID);
+		}
+
+		if (DOCUMENT_ID == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(DOCUMENT_ID);
 		}
 
 		if (NAME == null) {
@@ -112,6 +129,7 @@ public class DriveLinksCacheModel implements CacheModel<DriveLinks>,
 	}
 
 	public String USER_ID;
+	public String DOCUMENT_ID;
 	public String NAME;
 	public String URL;
 }

@@ -52,18 +52,18 @@ public class DriveLinksClp extends BaseModelImpl<DriveLinks>
 
 	@Override
 	public DriveLinksPK getPrimaryKey() {
-		return new DriveLinksPK(_USER_ID, _NAME);
+		return new DriveLinksPK(_USER_ID, _DOCUMENT_ID);
 	}
 
 	@Override
 	public void setPrimaryKey(DriveLinksPK primaryKey) {
 		setUSER_ID(primaryKey.USER_ID);
-		setNAME(primaryKey.NAME);
+		setDOCUMENT_ID(primaryKey.DOCUMENT_ID);
 	}
 
 	@Override
 	public Serializable getPrimaryKeyObj() {
-		return new DriveLinksPK(_USER_ID, _NAME);
+		return new DriveLinksPK(_USER_ID, _DOCUMENT_ID);
 	}
 
 	@Override
@@ -76,6 +76,7 @@ public class DriveLinksClp extends BaseModelImpl<DriveLinks>
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("USER_ID", getUSER_ID());
+		attributes.put("DOCUMENT_ID", getDOCUMENT_ID());
 		attributes.put("NAME", getNAME());
 		attributes.put("URL", getURL());
 
@@ -88,6 +89,12 @@ public class DriveLinksClp extends BaseModelImpl<DriveLinks>
 
 		if (USER_ID != null) {
 			setUSER_ID(USER_ID);
+		}
+
+		String DOCUMENT_ID = (String)attributes.get("DOCUMENT_ID");
+
+		if (DOCUMENT_ID != null) {
+			setDOCUMENT_ID(DOCUMENT_ID);
 		}
 
 		String NAME = (String)attributes.get("NAME");
@@ -119,6 +126,29 @@ public class DriveLinksClp extends BaseModelImpl<DriveLinks>
 				Method method = clazz.getMethod("setUSER_ID", String.class);
 
 				method.invoke(_driveLinksRemoteModel, USER_ID);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getDOCUMENT_ID() {
+		return _DOCUMENT_ID;
+	}
+
+	@Override
+	public void setDOCUMENT_ID(String DOCUMENT_ID) {
+		_DOCUMENT_ID = DOCUMENT_ID;
+
+		if (_driveLinksRemoteModel != null) {
+			try {
+				Class<?> clazz = _driveLinksRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setDOCUMENT_ID", String.class);
+
+				method.invoke(_driveLinksRemoteModel, DOCUMENT_ID);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -242,6 +272,7 @@ public class DriveLinksClp extends BaseModelImpl<DriveLinks>
 		DriveLinksClp clone = new DriveLinksClp();
 
 		clone.setUSER_ID(getUSER_ID());
+		clone.setDOCUMENT_ID(getDOCUMENT_ID());
 		clone.setNAME(getNAME());
 		clone.setURL(getURL());
 
@@ -284,10 +315,12 @@ public class DriveLinksClp extends BaseModelImpl<DriveLinks>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(7);
+		StringBundler sb = new StringBundler(9);
 
 		sb.append("{USER_ID=");
 		sb.append(getUSER_ID());
+		sb.append(", DOCUMENT_ID=");
+		sb.append(getDOCUMENT_ID());
 		sb.append(", NAME=");
 		sb.append(getNAME());
 		sb.append(", URL=");
@@ -299,7 +332,7 @@ public class DriveLinksClp extends BaseModelImpl<DriveLinks>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(13);
+		StringBundler sb = new StringBundler(16);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rivetlogic.portlet.model.DriveLinks");
@@ -308,6 +341,10 @@ public class DriveLinksClp extends BaseModelImpl<DriveLinks>
 		sb.append(
 			"<column><column-name>USER_ID</column-name><column-value><![CDATA[");
 		sb.append(getUSER_ID());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>DOCUMENT_ID</column-name><column-value><![CDATA[");
+		sb.append(getDOCUMENT_ID());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>NAME</column-name><column-value><![CDATA[");
@@ -324,6 +361,7 @@ public class DriveLinksClp extends BaseModelImpl<DriveLinks>
 	}
 
 	private String _USER_ID;
+	private String _DOCUMENT_ID;
 	private String _NAME;
 	private String _URL;
 	private BaseModel<?> _driveLinksRemoteModel;
