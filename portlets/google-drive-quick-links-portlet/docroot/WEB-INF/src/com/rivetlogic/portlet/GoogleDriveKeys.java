@@ -24,15 +24,36 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PrefsPropsUtil;
 import com.liferay.portal.kernel.util.PropsUtil;
 
+/**
+ * The Class GoogleDriveKeys.
+ */
 public class GoogleDriveKeys {
+	
+	/** The Constant GOOGLE_DRIVE_CLIENTID. */
 	private static final String GOOGLE_DRIVE_CLIENTID="google.drive.clientid";
+	
+	/** The Constant GOOGLE_DRIVE_DEVKEY. */
 	private static final String GOOGLE_DRIVE_DEVKEY="google.drive.devkey";
 	
+	/**
+	 * Gets the client id.
+	 *
+	 * @param companyId the company id
+	 * @return the client id
+	 * @throws SystemException the system exception
+	 */
 	public static String getClientId(long companyId) throws SystemException{
 		return PrefsPropsUtil.getString(companyId, GOOGLE_DRIVE_CLIENTID, 
 				GetterUtil.getString(PropsUtil.get(GOOGLE_DRIVE_CLIENTID)));
 	}
 	
+	/**
+	 * Gets the dev key.
+	 *
+	 * @param companyId the company id
+	 * @return the dev key
+	 * @throws SystemException the system exception
+	 */
 	public static String getDevKey(long companyId) throws SystemException{
 		return PrefsPropsUtil.getString(companyId, GOOGLE_DRIVE_DEVKEY, 
 				GetterUtil.getString(PropsUtil.get(GOOGLE_DRIVE_DEVKEY)));

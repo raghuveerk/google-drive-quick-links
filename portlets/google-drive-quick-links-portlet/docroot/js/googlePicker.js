@@ -20,17 +20,16 @@ YUI.add('picker-module', function (Y) {
     var clientId = "";
     var scope = ['https://www.googleapis.com/auth/drive'];
     var pickerApiLoaded = false;
+    var isUserSelected = false;
     var oauthToken = "";
 	
     var portletNamespace = "";
-    var action="";
 	
     Y.namespace('MyGooglePicker');
     // Use the API Loader script to load google.picker and gapi.auth.
-    Y.MyGooglePicker.onApiLoad = function(devKey,cId,selectAction,pns) {
+    Y.MyGooglePicker.onApiLoad = function(devKey,cId,pns) {
         developerKey=devKey;
         clientId=cId;
-        action=selectAction;
         portletNamespace=pns;
 		
         gapi.load('auth', {'callback': Y.MyGooglePicker.onAuthApiLoad});
@@ -41,13 +40,22 @@ YUI.add('picker-module', function (Y) {
 		        {
 		            'client_id': clientId,
 		            'scope': scope,
+		            'immediate': true
+		        },
+		        Y.MyGooglePicker.handleAuthResult);
+    },
+    Y.MyGooglePicker.onAuthorize = function() {
+    	isUserSelected = true;
+    	window.gapi.auth.authorize(
+		        {
+		            'client_id': clientId,
+		            'scope': scope,
 		            'immediate': false
 		        },
 		        Y.MyGooglePicker.handleAuthResult);
     },
     Y.MyGooglePicker.onPickerApiLoad = function() {
         pickerApiLoaded = true;
-        Y.MyGooglePicker.createPicker();
     },
     Y.MyGooglePicker.handleAuthResult = function(authResult) {
         if (authResult && !authResult.error) {
@@ -56,7 +64,7 @@ YUI.add('picker-module', function (Y) {
 	    }
     },
     Y.MyGooglePicker.createPicker = function() {
-        if (pickerApiLoaded && oauthToken) {
+        if (pickerApiLoaded && oauthToken && isUserSelected) {
             var picker = new google.picker.PickerBuilder().
 		        addView(google.picker.ViewId.DOCS).
 		        addView(new google.picker.DocsUploadView()).
@@ -73,16 +81,12 @@ YUI.add('picker-module', function (Y) {
 	        var doc = data[google.picker.Response.DOCUMENTS][0];
 	        var name = doc[google.picker.Document.NAME];
 	        var id = doc[google.picker.Document.ID];
-	         
-	        var url = doc[google.picker.Document.URL]; 
-	        var urlIndex = url.lastIndexOf("/");
-	        url = url.substring(0,urlIndex);
+	        var url = doc[google.picker.Document.URL];
 	         
 	        document.getElementById(portletNamespace+'documentUrl').value=url;
 	        document.getElementById(portletNamespace+'documentName').value=name;
 	        document.getElementById(portletNamespace+'documentId').value=id;
 	         
-	        UtilityClass.setAction(portletNamespace,action);
 	        UtilityClass.formSubmit(portletNamespace);
 	    }
     };	

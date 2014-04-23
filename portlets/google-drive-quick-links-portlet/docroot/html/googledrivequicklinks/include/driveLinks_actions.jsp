@@ -24,25 +24,12 @@
 <% 
 ResultRow row = (ResultRow)request.getAttribute(com.liferay.portal.kernel.util.WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 DriveLinks link = (DriveLinks)row.getObject();
-
-String edit = "/edit";
 %>
 
 <portlet:actionURL name="deleteDriveLink" var="deleteDriveLinkUrl">
     <portlet:param name="linkId" value="<%=link.getDOCUMENT_ID()%>"/>
     <portlet:param name="linkUser" value="<%=link.getUSER_ID()%>"/>
+    <portlet:param name="redirectTo" value="<%= PortalUtil.getCurrentURL(request) %>"/>
 </portlet:actionURL>
 
-<liferay-ui:icon-menu>
-    <liferay-ui:icon-delete url="${deleteDriveLinkUrl}" />
-    <li>
-        <a href="<%=link.getURL() + edit %>" target="_blank" class="taglib-icon focus">
-            <img src="/html/themes/classic/images/common/desktop.png" alt=""/>
-            <span class="taglib-text-icon">
-                <liferay-ui:message key="open-new-window" />
-            </span>
-        </a>
-    </li>
-    <liferay-ui:icon-delete url="#" cssClass="hidden" />
-</liferay-ui:icon-menu>
-				
+<liferay-ui:icon-delete url="${deleteDriveLinkUrl}" />

@@ -30,6 +30,8 @@ import javax.portlet.RenderResponse;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -38,39 +40,51 @@ import com.liferay.util.bridges.mvc.MVCPortlet;
 import com.rivetlogic.portlet.model.impl.DriveLinksImpl;
 import com.rivetlogic.portlet.service.DriveLinksLocalServiceUtil;
 
+/**
+ * The Class GoogleDriveQuickLinks.
+ */
 public class GoogleDriveQuickLinks extends MVCPortlet {
+    
+    /** The Constant LOG. */
     private static final Log LOG = 
 	        LogFactoryUtil.getLog(GoogleDriveQuickLinks.class);
  
+    /* (non-Javadoc)
+     * @see javax.portlet.GenericPortlet#render(javax.portlet.RenderRequest, javax.portlet.RenderResponse)
+     */
+    @Override
+    public void render(RenderRequest request, RenderResponse response) throws PortletException, IOException{
+
+    	addDriveParamsToRequest(request);
+    	super.render(request, response);
+    }
+    
+    /* (non-Javadoc)
+     * @see com.liferay.util.bridges.mvc.MVCPortlet#doView(javax.portlet.RenderRequest, javax.portlet.RenderResponse)
+     */
     @Override
     public void doView(RenderRequest request, RenderResponse response) 
             throws IOException, PortletException {
 		
-        ThemeDisplay themeDisplay = 
-                (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
-		
-        String googleClientId = ""; 
-        String googleDeveloperKey = "";
-        
-		try {
-			googleClientId = GoogleDriveKeys.getClientId(themeDisplay.getCompanyId());
-			googleDeveloperKey = GoogleDriveKeys.getDevKey(themeDisplay.getCompanyId());
-		} catch (SystemException e) {
-			LOG.error(e);
-		}
-		
-		request.setAttribute("userId", themeDisplay.getRealUser().getUuid());
-		request.setAttribute("signedUser", themeDisplay.isSignedIn());
-		request.setAttribute("developerKey", googleDeveloperKey);
-        request.setAttribute("clientId", googleClientId);
-		
+    	addDriveParamsToRequest(request);
+    	
+    	ThemeDisplay themeDisplay = 
+    			(ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
+    	if(!themeDisplay.isSignedIn()){
+    		SessionMessages.add(request, request.getAttribute(WebKeys.PORTLET_ID) + SessionMessages.KEY_SUFFIX_HIDE_DEFAULT_ERROR_MESSAGE);
+    		SessionErrors.add(request, "portlet-user-not-logged");
+    	}
         super.doView(request, response);
     }
 	
-    public void selectDriveFile(ActionRequest request, ActionResponse response) {
-		request.setAttribute("showDrive", true);    	
-	}
-	
+	/**
+	 * Adds the drive link.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @throws PortletException the portlet exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public void addDriveLink(ActionRequest request, ActionResponse response)
             throws PortletException, IOException{
 		
@@ -94,8 +108,17 @@ public class GoogleDriveQuickLinks extends MVCPortlet {
         } catch (SystemException e) {
             LOG.error(e);
         }
+        response.sendRedirect(ParamUtil.getString(request, "redirectTo"));
     }
 
+    /**
+     * Delete drive link.
+     *
+     * @param request the request
+     * @param response the response
+     * @throws PortletException the portlet exception
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     public void deleteDriveLink(ActionRequest request, ActionResponse response)
             throws PortletException, IOException{
 		
@@ -111,5 +134,31 @@ public class GoogleDriveQuickLinks extends MVCPortlet {
         } catch (SystemException e) { 
             LOG.error(e);
         }
+        response.sendRedirect(ParamUtil.getString(request, "redirectTo"));
+    }
+    
+    /**
+     * Adds the drive params to request.
+     *
+     * @param request the request
+     */
+    private void addDriveParamsToRequest(RenderRequest request) {
+    	
+    	ThemeDisplay themeDisplay = 
+    			(ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
+    	
+    	String googleClientId = ""; 
+    	String googleDeveloperKey = "";
+    	
+    	try {
+    		googleClientId = GoogleDriveKeys.getClientId(themeDisplay.getCompanyId());
+    		googleDeveloperKey = GoogleDriveKeys.getDevKey(themeDisplay.getCompanyId());
+    	} catch (SystemException e) {
+    		LOG.error(e);
+    	}
+    	
+    	request.setAttribute("userId", themeDisplay.getRealUser().getUuid());
+    	request.setAttribute("developerKey", googleDeveloperKey);
+    	request.setAttribute("clientId", googleClientId);
     }
 }

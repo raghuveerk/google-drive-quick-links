@@ -15,27 +15,23 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-AUI().use('aui-modal', 'aui-io', function (A) {
+AUI().use('aui-modal', 'aui-io','picker-module', function (A) {
     function UtilityClass() {
         this.portletNamespace;
         this.developerKey;
         this.clientId;
-        
         this.scope = ['https://www.googleapis.com/auth/drive'];
         this.pickerApiLoaded = false;
         this.oauthToken;
     }
 
     UtilityClass.prototype = {
-        setAction: function (pns, action) {
-            this.portletNamespace = pns;
-            document.getElementById(this.portletNamespace + 'form').action = action;
-        },
         formSubmit: function (pns) {
             this.portletNamespace = pns;
-
-            document.getElementById(
-                this.portletNamespace + 'form').submit();
+            A.one("#"+ this.portletNamespace +"form").submit();
+        },
+        selectFile: function (devKey,cId,pns) {
+        	A.MyGooglePicker.onAuthorize();
         }
     };
     window.UtilityClass = new UtilityClass();

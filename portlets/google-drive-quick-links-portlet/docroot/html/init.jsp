@@ -31,6 +31,7 @@
 <%@ page import="com.liferay.portal.theme.ThemeDisplay" %>
 <%@ page import="com.liferay.portal.kernel.util.WebKeys" %>
 <%@ page import="com.liferay.portal.util.PortletKeys" %>
+<%@ page import="com.liferay.portal.util.PortalUtil" %>
 
 <%@ page import="com.rivetlogic.portlet.service.DriveLinksLocalServiceUtil" %>
 <%@ page import="com.rivetlogic.portlet.model.DriveLinks" %>
@@ -42,3 +43,5 @@
 <liferay-theme:defineObjects />
 
 <c:set var="pns"><portlet:namespace/></c:set>
+<c:set var="developerKey" value="${developerKey}"/>
+<c:set var="clientId" value="${clientId}"/>
