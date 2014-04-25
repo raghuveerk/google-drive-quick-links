@@ -31,7 +31,7 @@ AUI().use('aui-modal', 'aui-io','picker-module', function (A) {
             A.one("#"+ this.portletNamespace +"form").submit();
         },
         selectFile: function (devKey,cId,pns) {
-        	A.MyGooglePicker.onAuthorize();
+            A.MyGooglePicker.onApiLoad(devKey, cId, pns);
         }
     };
     window.UtilityClass = new UtilityClass();

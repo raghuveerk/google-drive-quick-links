@@ -74,9 +74,14 @@ iteratorURL.setParameter("userId", userId);
 	</aui:form>	
 </c:if>
 
-<script type="text/javascript" src="https://apis.google.com/js/api.js"></script>
+
 <c:if test="<%= themeDisplay.isSignedIn()%>">
-	<aui:script use="picker-module">
-		A.MyGooglePicker.onApiLoad('${developerKey}','${clientId}','${pns}');
-	</aui:script>
+    <script type="text/javascript">
+        function onApiLoad() {
+              gapi.load('auth', {'callback': function() { }});
+              gapi.load('picker', {'callback': function() { }});
+        }
+    </script>
+    <script type="text/javascript" src="https://apis.google.com/js/api.js?onload=onApiLoad"></script>
+    
 </c:if>	
