@@ -40,22 +40,14 @@ YUI.add('picker-module', function (Y) {
 		        {
 		            'client_id': clientId,
 		            'scope': scope,
-		            'immediate': true
-		        },
-		        Y.MyGooglePicker.handleAuthResult);
-    },
-    Y.MyGooglePicker.onAuthorize = function() {
-    	isUserSelected = true;
-    	window.gapi.auth.authorize(
-		        {
-		            'client_id': clientId,
-		            'scope': scope,
 		            'immediate': false
 		        },
 		        Y.MyGooglePicker.handleAuthResult);
     },
+    
     Y.MyGooglePicker.onPickerApiLoad = function() {
         pickerApiLoaded = true;
+        Y.MyGooglePicker.createPicker();
     },
     Y.MyGooglePicker.handleAuthResult = function(authResult) {
         if (authResult && !authResult.error) {
@@ -64,7 +56,7 @@ YUI.add('picker-module', function (Y) {
 	    }
     },
     Y.MyGooglePicker.createPicker = function() {
-        if (pickerApiLoaded && oauthToken && isUserSelected) {
+        if (pickerApiLoaded && oauthToken) {
             var picker = new google.picker.PickerBuilder().
 		        addView(google.picker.ViewId.DOCS).
 		        addView(new google.picker.DocsUploadView()).
